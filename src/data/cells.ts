@@ -31,7 +31,7 @@ export type CellModelAsset = {
   rotation?: [number, number, number];
   position?: [number, number, number];
   exposure?: number;
-  materialMode?: "studio" | "native";
+  materialMode?: "studio" | "native" | "vertexColor";
 };
 
 export type CellRenderImage = {
@@ -479,14 +479,15 @@ export const cells: CellItem[] = [
       aspect: "square",
     },
     modelAsset: {
-      url: "/models/animal-cell-nih.glb",
-      previewUrl: "/nih-previews/animal-cell-nih.png",
-      sourceLabel: "NIH 3D Animal Cell",
-      sourceUrl: "https://3d.nih.gov/entries/3DPX-015797/2",
-      scale: 0.044,
-      rotation: [0.24, -0.08, 0.03],
-      position: [0, -0.03, 0],
+      url: "models/animal-cell-nih.glb",
+      previewUrl: "nih-previews/animal-cell-nih.png",
+      sourceLabel: "Sketchfab Animal Cell 2.0",
+      sourceUrl: "https://sketchfab.com/3d-models/animal-cell-20-annotated-in-english-0d9f7f4257224975b2ef83a283709b2f",
+      scale: 0.5,
+      rotation: [0.542, -0.12, 0.03],
+      position: [0.1, -0.03, 0],
       exposure: 1.12,
+      materialMode: "studio",
     },
     occurrence: {
       title: "Animal tissues",
