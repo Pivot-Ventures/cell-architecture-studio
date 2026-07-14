@@ -800,6 +800,30 @@ a {
   line-height: 1.65;
 }
 
+.clinical-context {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, rgba(87, 78, 64, 0.14));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent-soft) 42%, rgba(255, 255, 255, 0.54));
+}
+
+.clinical-context > span {
+  color: color-mix(in srgb, var(--accent) 70%, #3b3329);
+  font-family: var(--note);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.clinical-context p {
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
 .fun-fact {
   display: flex;
   align-items: center;

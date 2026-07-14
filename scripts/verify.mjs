@@ -2,10 +2,12 @@ import { mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 import { PNG } from "pngjs";
+import { formatTargetHelp, hasExpectedAppIdentity } from "./verify-preflight.mjs";
 
 const url = process.env.APP_URL ?? "http://127.0.0.1:5173/";
 const chromePath =
   process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const navigationTimeoutMs = Number(process.env.VERIFY_NAVIGATION_TIMEOUT_MS ?? 12000);
 const outDir = new URL("../verification/", import.meta.url);
 
 function outPath(fileName) {
@@ -16,6 +18,44 @@ function assert(value, message) {
   if (!value) {
     throw new Error(message);
   }
+}
+
+function preflightError(message, cause) {
+  const details = [message, formatTargetHelp({ url, chromePath })];
+  if (cause?.message) {
+    details.push(`Original error: ${cause.message}`);
+  }
+  return new Error(details.join("\n\n"));
+}
+
+async function openVerifiedPage(browser, viewport) {
+  const page = await browser.newPage({ viewport, deviceScaleFactor: 1 });
+  page.setDefaultNavigationTimeout(navigationTimeoutMs);
+
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: navigationTimeoutMs });
+  } catch (error) {
+    await page.close();
+    throw preflightError(`Unable to open APP_URL ${url}.`, error);
+  }
+
+  const title = await page.title();
+  const bodyText = await page.locator("body").innerText({ timeout: 3000 }).catch(() => "");
+  if (!hasExpectedAppIdentity({ title, bodyText })) {
+    await page.close();
+    throw preflightError(
+      `APP_URL ${url} did not load Cell Architecture Studio. Received page title: "${title || "(empty)"}".`,
+    );
+  }
+
+  try {
+    await page.waitForSelector("canvas", { timeout: 15000 });
+  } catch (error) {
+    await page.close();
+    throw preflightError(`Cell Architecture Studio loaded, but no canvas appeared at ${url}.`, error);
+  }
+
+  return page;
 }
 
 async function readVisualMetrics(page, selector) {
@@ -66,9 +106,7 @@ async function readVisualMetrics(page, selector) {
 }
 
 async function verifyViewport(browser, name, viewport) {
-  const page = await browser.newPage({ viewport, deviceScaleFactor: 1 });
-  await page.goto(url, { waitUntil: "networkidle" });
-  await page.waitForSelector("canvas", { timeout: 15000 });
+  const page = await openVerifiedPage(browser, viewport);
   await page.waitForTimeout(1600);
 
   const title = await page.locator(".stage-title h2").innerText();
@@ -103,9 +141,7 @@ async function verifyViewport(browser, name, viewport) {
 }
 
 async function verifyInteractions(browser) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
-  await page.goto(url, { waitUntil: "networkidle" });
-  await page.waitForSelector("canvas", { timeout: 15000 });
+  const page = await openVerifiedPage(browser, { width: 1440, height: 1000 });
   await page.waitForTimeout(600);
 
   await page.locator(".cell-row").filter({ hasText: "Plant Cell" }).click();
@@ -164,11 +200,17 @@ async function verifyInteractions(browser) {
 
 await mkdir(outDir, { recursive: true });
 
-const browser = await chromium.launch({
-  executablePath: chromePath,
-  headless: true,
-  args: ["--no-sandbox", "--disable-dev-shm-usage"],
-});
+let browser;
+
+try {
+  browser = await chromium.launch({
+    executablePath: chromePath,
+    headless: true,
+    args: ["--no-sandbox", "--disable-dev-shm-usage"],
+  });
+} catch (error) {
+  throw preflightError(`Unable to launch Chrome at ${chromePath}.`, error);
+}
 
 try {
   const desktop = await verifyViewport(browser, "desktop", { width: 1440, height: 1000 });
@@ -201,5 +243,5 @@ try {
     ),
   );
 } finally {
-  await browser.close();
+  await browser?.close();
 }

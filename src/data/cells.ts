@@ -49,6 +49,7 @@ export type CellItem = {
   modelKind: ModelKind;
   defaultOrganelle: string;
   comparison: string;
+  clinicalContext: string;
   modelAsset?: CellModelAsset;
   renderImage?: CellRenderImage;
   occurrence: {
@@ -75,6 +76,8 @@ export const cells: CellItem[] = [
     modelKind: "plant",
     defaultOrganelle: "nucleus",
     comparison: "animal",
+    clinicalContext:
+      "A useful non-human baseline for teaching why cell walls and chloroplasts are absent from patient tissue samples.",
     renderImage: {
       url: "/cell-renders-transparent/plant.png",
       aspect: "square",
@@ -168,6 +171,8 @@ export const cells: CellItem[] = [
     modelKind: "whiteBlood",
     defaultOrganelle: "lysosome",
     comparison: "epithelial",
+    clinicalContext:
+      "Immune cell morphology is a bridge from basic cell biology to how clinicians interpret infection, inflammation, and blood smears.",
     renderImage: {
       url: "/cell-renders-transparent/white-blood.png",
       aspect: "square",
@@ -247,6 +252,8 @@ export const cells: CellItem[] = [
     modelKind: "neuron",
     defaultOrganelle: "axon",
     comparison: "muscle",
+    clinicalContext:
+      "Neuron shape helps learners connect cell structure with bedside neuroanatomy, reflexes, sensation, and motor signaling.",
     renderImage: {
       url: "/cell-renders-transparent/neuron.png",
       aspect: "wide",
@@ -326,6 +333,8 @@ export const cells: CellItem[] = [
     modelKind: "epithelial",
     defaultOrganelle: "microvilli",
     comparison: "animal",
+    clinicalContext:
+      "Epithelial polarity and tight junctions make this cell type central to barriers, absorption, and pathology slide interpretation.",
     renderImage: {
       url: "/cell-renders-transparent/epithelial.png",
       aspect: "square",
@@ -395,6 +404,8 @@ export const cells: CellItem[] = [
     modelKind: "bacteria",
     defaultOrganelle: "nucleoid",
     comparison: "animal",
+    clinicalContext:
+      "Cell wall structure provides a clinically relevant path from microscopy and Gram staining to antimicrobial mechanism discussions.",
     renderImage: {
       url: "/cell-renders-transparent/bacteria.png",
       aspect: "landscape",
@@ -474,6 +485,8 @@ export const cells: CellItem[] = [
     modelKind: "animal",
     defaultOrganelle: "mitochondrion",
     comparison: "plant",
+    clinicalContext:
+      "This general eukaryotic model helps learners anchor organelle functions before applying them to human tissues and disease mechanisms.",
     renderImage: {
       url: "/cell-renders-transparent/animal.png",
       aspect: "square",
@@ -554,6 +567,8 @@ export const cells: CellItem[] = [
     modelKind: "muscle",
     defaultOrganelle: "myofibril",
     comparison: "neuron",
+    clinicalContext:
+      "Muscle fiber architecture links microscopic structure with contraction, fatigue, rehabilitation, and neuromuscular disease teaching.",
     renderImage: {
       url: "/cell-renders-transparent/muscle.png",
       aspect: "wide",

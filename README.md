@@ -8,15 +8,15 @@
 ![Verification](https://img.shields.io/badge/verification-playwright%20screenshots-2ea44f)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-local%20prototype-f59e0b)
-[![Live Demo](https://img.shields.io/badge/live-demo-16a34a)](https://cell-architecture-studio-inky.vercel.app)
+[![Live Demo](https://img.shields.io/badge/live-demo-16a34a)](https://cell-architecture-studio.lanshuagent.com/)
 
 An interactive cell architecture gallery built with React, Vite, Three.js, and staged GLB or procedural 3D cell assets. The project recreates a premium educational biology interface with selectable cell types, organelle details, comparison mode, responsive layout, and visual verification coverage.
 
 ## Live Demo
 
-[Open the live Vercel deployment](https://cell-architecture-studio-inky.vercel.app)
+[Open the live deployment](https://cell-architecture-studio.lanshuagent.com/)
 
-[![Cell Architecture Studio demo](docs/media/cell-architecture-studio-demo.gif)](https://cell-architecture-studio-inky.vercel.app)
+[![Cell Architecture Studio demo](docs/media/cell-architecture-studio-demo.gif)](https://cell-architecture-studio.lanshuagent.com/)
 
 [View the MP4 demo file](docs/media/cell-architecture-studio-demo.mp4)
 
@@ -117,7 +117,25 @@ Transparent PNG references in `public/cell-renders-transparent/` are used for th
 
 ## Verification
 
-`npm run verify` launches the local app, captures desktop, compact, mobile, and interaction screenshots, then checks canvas pixel metrics to catch blank renders or major layout regressions.
+`npm run verify` expects the local app to already be running, captures desktop, compact, mobile, and interaction screenshots, then checks canvas pixel metrics to catch blank renders or major layout regressions.
+
+Start the app before running visual verification:
+
+```bash
+npm run dev
+```
+
+By default, verification opens `http://127.0.0.1:5173/`. If Vite uses another port, pass the app URL explicitly:
+
+```bash
+APP_URL=http://127.0.0.1:5174/ npm run verify
+```
+
+The script uses Google Chrome through Playwright Core. If Chrome is installed in a non-default location, pass the executable path:
+
+```bash
+CHROME_PATH="/path/to/Google Chrome" npm run verify
+```
 
 Current coverage includes:
 
