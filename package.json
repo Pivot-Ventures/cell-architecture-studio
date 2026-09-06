@@ -1,6 +1,6 @@
 {
   "name": "cell-architecture-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -16,7 +16,10 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "node --test scripts/*.test.mjs",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "build:easi": "BASE_PATH=/atlas/cells/ vite build",
+    "deploy:easi": "bash scripts/deploy-easi.sh",
+    "typecheck": "tsc -b"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
