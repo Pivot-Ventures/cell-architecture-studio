@@ -1566,10 +1566,6 @@ a {
   text-align: right;
 }
 
-.canvas-wrap {
-  position: relative;
-}
-
 .stage-legend {
   position: absolute;
   left: 14px;
