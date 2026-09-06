@@ -7,7 +7,7 @@ export type ModelKind =
   | "animal"
   | "muscle";
 
-export type ViewMode = "mesh" | "focus";
+export type ViewMode = "mesh" | "focus" | "isolate";
 
 export type OrganelleItem = {
   id: string;
@@ -79,14 +79,14 @@ export const cells: CellItem[] = [
     clinicalContext:
       "A useful non-human baseline for teaching why cell walls and chloroplasts are absent from patient tissue samples.",
     renderImage: {
-      url: "/cell-renders-transparent/plant.png",
+      url: "cell-renders-transparent/plant.png",
       aspect: "square",
     },
     modelAsset: {
-      url: "/models/plant-cell-first001.glb",
-      previewUrl: "/cell-renders-transparent/plant.png",
+      url: "models/plant-cell-first001.glb",
+      previewUrl: "cell-renders-transparent/plant.png",
       sourceLabel: "User Plant Cell GLB first001",
-      sourceUrl: "local:/Users/lank/Downloads/first001.glb",
+      sourceUrl: "User-provided GLB (first001)",
       scale: 2.36,
       rotation: [0.08, -1.42, -0.02],
       exposure: 1.08,
@@ -174,14 +174,14 @@ export const cells: CellItem[] = [
     clinicalContext:
       "Immune cell morphology is a bridge from basic cell biology to how clinicians interpret infection, inflammation, and blood smears.",
     renderImage: {
-      url: "/cell-renders-transparent/white-blood.png",
+      url: "cell-renders-transparent/white-blood.png",
       aspect: "square",
     },
     modelAsset: {
-      url: "/models/white-blood-cell-user.glb",
-      previewUrl: "/cell-renders-transparent/white-blood.png",
+      url: "models/white-blood-cell-user.glb",
+      previewUrl: "cell-renders-transparent/white-blood.png",
       sourceLabel: "User White Blood Cell GLB",
-      sourceUrl: "local:/Users/lank/Downloads/second.glb",
+      sourceUrl: "User-provided GLB (second)",
       scale: 3.18,
       rotation: [0.02, -0.18, 0],
       exposure: 1.08,
@@ -255,12 +255,12 @@ export const cells: CellItem[] = [
     clinicalContext:
       "Neuron shape helps learners connect cell structure with bedside neuroanatomy, reflexes, sensation, and motor signaling.",
     renderImage: {
-      url: "/cell-renders-transparent/neuron.png",
+      url: "cell-renders-transparent/neuron.png",
       aspect: "wide",
     },
     modelAsset: {
-      url: "/models/neuron-nih.glb",
-      previewUrl: "/nih-previews/neuron-nih.png",
+      url: "models/neuron-nih.glb",
+      previewUrl: "nih-previews/neuron-nih.png",
       sourceLabel: "NIH 3D Neuron",
       sourceUrl: "https://3d.nih.gov/entries/3DPX-015796/2",
       scale: 3.15,
@@ -336,7 +336,7 @@ export const cells: CellItem[] = [
     clinicalContext:
       "Epithelial polarity and tight junctions make this cell type central to barriers, absorption, and pathology slide interpretation.",
     renderImage: {
-      url: "/cell-renders-transparent/epithelial.png",
+      url: "cell-renders-transparent/epithelial.png",
       aspect: "square",
     },
     occurrence: {
@@ -407,12 +407,12 @@ export const cells: CellItem[] = [
     clinicalContext:
       "Cell wall structure provides a clinically relevant path from microscopy and Gram staining to antimicrobial mechanism discussions.",
     renderImage: {
-      url: "/cell-renders-transparent/bacteria.png",
+      url: "cell-renders-transparent/bacteria.png",
       aspect: "landscape",
     },
     modelAsset: {
-      url: "/models/bacteria-wall-nih.glb",
-      previewUrl: "/nih-previews/bacteria-wall-nih.png",
+      url: "models/bacteria-wall-nih.glb",
+      previewUrl: "nih-previews/bacteria-wall-nih.png",
       sourceLabel: "NIH 3D Gram Positive Cell Wall",
       sourceUrl: "https://3d.nih.gov/entries/3DPX-010752/2",
       scale: 0.00185,
@@ -488,7 +488,7 @@ export const cells: CellItem[] = [
     clinicalContext:
       "This general eukaryotic model helps learners anchor organelle functions before applying them to human tissues and disease mechanisms.",
     renderImage: {
-      url: "/cell-renders-transparent/animal.png",
+      url: "cell-renders-transparent/animal.png",
       aspect: "square",
     },
     modelAsset: {
@@ -570,7 +570,7 @@ export const cells: CellItem[] = [
     clinicalContext:
       "Muscle fiber architecture links microscopic structure with contraction, fatigue, rehabilitation, and neuromuscular disease teaching.",
     renderImage: {
-      url: "/cell-renders-transparent/muscle.png",
+      url: "cell-renders-transparent/muscle.png",
       aspect: "wide",
     },
     occurrence: {

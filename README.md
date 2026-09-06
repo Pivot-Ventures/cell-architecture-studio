@@ -162,3 +162,27 @@ The application code is licensed under the MIT License. Included GLB models and 
 Special thanks to the original creator [@DilumSanjaya](https://x.com/DilumSanjaya) for the source inspiration and visual direction.
 
 Additional 3D model provenance is documented in `docs/ASSETS.md`.
+
+## EASI hosting (Human Atlas, Cells tab)
+
+The studio is served at https://easi.pivotventures.tech/atlas/cells/ from `/opt/basi/human-atlas-static/cells` on the BASI droplet. Every public asset is resolved through `src/lib/assets.ts` against Vite's base URL, so the same code works at the site root locally and under the nested mount.
+
+```bash
+npm run build:easi    # vite build with BASE_PATH=/atlas/cells/
+npm run deploy:easi   # build, rsync to the droplet, verify through Caddy
+```
+
+`deploy:easi` defaults to `root@204.48.26.134` with `~/.ssh/basi_do`; pass a different `user@host` and key as arguments.
+
+### What the buttons do
+
+- **View mode**: full cell, Focus (dims the other organelles), Isolate (hides them). Scanned specimens switch to their schematic twin for organelle work; the toggle in the view card swaps between the 3D scan and the schematic.
+- **Cross Section** clips the specimen against a plane; the depth slider moves the cut.
+- **Screenshot** saves the stage as PNG. **GLB Export** writes the current specimen with the Three.js GLTF exporter.
+- **Microscope View** opens the reference render with a light, stained, or electron filter; **Add Image** adds your own micrograph for this session.
+- **AI Tutor** prompts stream an answer from the EASI gpt-oss tutor when the studio is opened from a signed-in EASI session.
+- **Gallery, Library, Notebooks, Settings** open the specimen grid, the organelle glossary, per-cell notes, and stage preferences. Favourites, progress, notes, and settings persist in the browser.
+
+### Models
+
+The scanned specimens were slimmed with glTF Transform and meshoptimizer (simplified, quantised, WebP textures) from 208 MB to under 4 MB in total so they load on school connections. The originals are in the git history before v0.2.0.
