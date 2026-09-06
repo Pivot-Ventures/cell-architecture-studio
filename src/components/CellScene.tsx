@@ -2,6 +2,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Center, ContactShadows, Float, Html, OrbitControls, RoundedBox, useGLTF, useProgress } from "@react-three/drei";
 import { Component, Suspense, useEffect, useMemo, useRef, type ErrorInfo, type MutableRefObject, type ReactNode } from "react";
 import {
+  Box3,
   Color,
   CatmullRomCurve3,
   DoubleSide,
@@ -191,6 +192,9 @@ function createNativeAssetMaterial({ original, asset, crossSection }: { original
   return Array.isArray(original) ? original.map(cloneMaterial) : cloneMaterial(original);
 }
 
+/** Largest dimension every scanned specimen is normalised to, in scene units. */
+const SPECIMEN_SIZE = 3.4;
+
 function AssetCellModel({ cell, asset, viewMode, crossSection }: CommonModelProps & { cell: CellItem; asset: CellModelAsset }) {
   const { scene } = useGLTF(assetUrl(asset.url));
   const clonedScene = useMemo(() => {
@@ -211,10 +215,22 @@ function AssetCellModel({ cell, asset, viewMode, crossSection }: CommonModelProp
     return clone;
   }, [asset, cell, scene, viewMode, crossSection]);
 
+  // Fit the scan to the stage regardless of the units it was exported in, so
+  // every specimen fills the same space as the schematic cells.
+  const fit = useMemo(() => {
+    clonedScene.updateMatrixWorld(true);
+    const bounds = new Box3().setFromObject(clonedScene);
+    const size = bounds.getSize(new Vector3());
+    const largest = Math.max(size.x, size.y, size.z, 0.001);
+    return SPECIMEN_SIZE / largest;
+  }, [clonedScene]);
+
   return (
-    <group position={asset.position ?? [0, 0, 0]} rotation={asset.rotation ?? [0, 0, 0]} scale={[asset.scale, asset.scale, asset.scale]}>
+    <group rotation={asset.rotation ?? [0, 0, 0]}>
       <Center>
-        <primitive object={clonedScene} />
+        <group scale={[fit, fit, fit]}>
+          <primitive object={clonedScene} />
+        </group>
       </Center>
     </group>
   );
