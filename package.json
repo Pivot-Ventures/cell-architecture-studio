@@ -4,12 +4,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cclank/cell-architecture-studio.git"
+    "url": "git+https://github.com/Pivot-Ventures/cell-architecture-studio.git"
   },
   "bugs": {
-    "url": "https://github.com/cclank/cell-architecture-studio/issues"
+    "url": "https://github.com/Pivot-Ventures/cell-architecture-studio/issues"
   },
-  "homepage": "https://github.com/cclank/cell-architecture-studio#readme",
+  "homepage": "https://easi.pivotventures.tech/atlas/cells/",
   "type": "module",
   "scripts": {
     "dev": "vite",

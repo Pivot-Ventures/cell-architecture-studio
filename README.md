@@ -8,15 +8,15 @@
 ![Verification](https://img.shields.io/badge/verification-playwright%20screenshots-2ea44f)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-local%20prototype-f59e0b)
-[![Live Demo](https://img.shields.io/badge/live-demo-16a34a)](https://cell-architecture-studio.lanshuagent.com/)
+[![Live on EASI](https://img.shields.io/badge/live-EASI%20Human%20Atlas-16a34a)](https://easi.pivotventures.tech/atlas/cells/)
 
 An interactive cell architecture gallery built with React, Vite, Three.js, and staged GLB or procedural 3D cell assets. The project recreates a premium educational biology interface with selectable cell types, organelle details, comparison mode, responsive layout, and visual verification coverage.
 
 ## Live Demo
 
-[Open the live deployment](https://cell-architecture-studio.lanshuagent.com/)
+[Open the live deployment](https://easi.pivotventures.tech/atlas/cells/)
 
-[![Cell Architecture Studio demo](docs/media/cell-architecture-studio-demo.gif)](https://cell-architecture-studio.lanshuagent.com/)
+[![Cell Architecture Studio demo](docs/media/cell-architecture-studio-demo.gif)](https://easi.pivotventures.tech/atlas/cells/)
 
 [View the MP4 demo file](docs/media/cell-architecture-studio-demo.mp4)
 
